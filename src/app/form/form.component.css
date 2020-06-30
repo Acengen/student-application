@@ -1,0 +1,20 @@
+form {
+    max-width: 600px;
+   
+}
+
+input[type="radio"] {
+    width: 15px;
+   
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid crimson;
+}
+
+input.ng-valid.ng-touched {
+    border: 1px solid seagreen;
+}
+label {
+    font-weight: bold;
+}

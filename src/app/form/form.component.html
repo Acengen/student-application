@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-md-6">
+        <form [formGroup]="signForm" (ngSubmit)="onSubmit()">
+            <h2 class="text-center py-3">Application</h2>
+            <div class="form-group">
+                <label>Name:</label>
+                *<input formControlName="name" type="text" class="form-control">
+                <p style="color: crimson;" *ngIf="!signForm.get('name').valid && signForm.get('name').touched">*Enter
+                    your name</p>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                *<input formControlName="email" type="email" class="form-control">
+                <p style="color: crimson;" *ngIf="!signForm.get('email').valid && signForm.get('email').touched">*Email
+                    must be a valid address, e.g.me@mydomain.com</p>
+            </div>
+            <div class="form-group">
+                <label>Age:</label>
+                *<input formControlName="age" type="number" class="form-control">
+                <p style="color: crimson;" *ngIf="!signForm.get('age').valid && signForm.get('age').touched">*Enter your
+                    age</p>
+            </div>
+            <div class="form-group">
+                <label>Phone Number:</label>
+                *<input formControlName="phone" type="text" class="form-control">
+                <p style="color: crimson;" *ngIf="!signForm.get('phone').valid && signForm.get('phone').touched">*Only
+                    numbers between 4-11</p>
+            </div>
+            <div class="form-group">
+                <label>Preferred Way of Communication: </label>
+                *<div *ngFor="let cont of contact">
+                    <label>
+                        <input formControlName="com" type="radio" [value]="cont">
+                        {{cont}}
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label>English Level:</label>
+                *<select class="form-control" formControlName="select">
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advance">Advance</option>
+                    <option value="Expert">Expert</option>
+                </select>
+                <p style="color: crimson;" *ngIf="!signForm.get('select').valid && signForm.get('select').touched">
+                    *Please add your english
+                    level</p>
+            </div>
+            <div class="form-group">
+                <label>Available to Start: </label>
+                *<input type="date" formControlName="date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Technical Skills and Courses</label>
+                <input type="text" formControlName="tech" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Short Personal Presentation:</label>
+                <textarea class="form-control" formControlName="textarea" cols="30" rows="10"
+                    placeholder="e.g. reason for joining the program"></textarea>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" formControlName="check" class="form-check-input">
+                <label class="form-check-label" for="exampleCheck1">Study from home</label>
+            </div>
+            <button type="submit" class="btn btn-primary"
+                [disabled]="!signForm.valid">{{editMode ? 'Update':'Add'}}</button>
+        </form>
+    </div>
+    <div class="col-xs-5">
+        <div class="row my-3" *ngIf="applications.length > 0;else temp">
+            <app-applications *ngFor="let app of applications;let i = index" [applications]="app" [index]='i'>
+            </app-applications>
+        </div>
+        <ng-template #temp>
+            <p class="py-3">Please fill the application <br>
+                <i class="fa fa-arrow-left"></i></p>
+        </ng-template>
+    </div>
+</div>
